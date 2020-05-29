@@ -19,6 +19,7 @@ module GeneralMetrics
 
   module Adapters
     autoload :Mixpanel, 'general_metrics/adapters/mixpanel'
+    autoload :Keen, 'general_metrics/adapters/keen'
   end
 
   module Trackers
