@@ -1,8 +1,6 @@
 # GeneralMetrics
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/general_metrics`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A simple gem that collects application data to send to a metrics service.
 
 ## Installation
 
@@ -20,19 +18,71 @@ Or install it yourself as:
 
     $ gem install general_metrics
 
-## Usage
+## Setup
 
-TODO: Write usage instructions here
+You can setup the following adapters/services:
 
-## Development
+1. Mixpanel - https://mixpanel.com/
+2. Keen - https://keen.io/
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## Setup Mixpanel
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Below we setup Mixpanel service using the slow request tracker:
 
-## Contributing
+```ruby
+  # config/initializer/general_metrics.rb
+  require 'general_metrics/rails'
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/general_metrics.
+  GeneralMetrics.configure do |config|
+    config.adapter = :mixpanel
+    config.adapter_options = { secret: 'my-secret' }
+    config.extra_attributes = { app: 'My-App' }
+    config.logger = Rails.logger
+    config.trackers = %i(slow_request)
+    config.thresholds = { slow_request: 1_000 }
+  end
+```
+
+## Setup Keen
+
+Below we setup the Keen service using the slow request tracker:
+
+```ruby
+  # config/initializer/general_metrics.rb
+  require 'general_metrics/rails'
+
+  GeneralMetrics.configure do |config|
+    config.adapter = :keen
+    config.adapter_options = {
+      project_id: 'my-project-id',
+      write_key: 'my-write-key',
+    }
+    config.extra_attributes = { app: 'My-App' }
+    config.logger = Rails.logger
+    config.trackers = %i(slow_request)
+    config.thresholds = { slow_request: 1_000 }
+  end
+```
+
+## Metrics
+
+For the first version, we support for now, the rails event 'process_action.action_controller'.
+
+We will add more trackers as we go. We can pickup ideas from [rails docs](https://guides.rubyonrails.org/active_support_instrumentation.html#sql-active-record)
+
+### Slow request
+
+If the request time is bigger than the slow request threshold, then the event
+will be published by the adapter.
+
+The threshold can be setup by:
+
+```ruby
+    config.thresholds = { slow_request: 1_000 }
+```
+
+This will tell the gem to send metrics only if the request time are greater than
+1 second.
 
 ## License
 
