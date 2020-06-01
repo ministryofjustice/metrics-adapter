@@ -17,6 +17,9 @@ module MetricsAdapter
   mattr_accessor :thresholds
   self.thresholds = {}
 
+  mattr_accessor :conditionals
+  self.conditionals = {}
+
   module Adapters
     autoload :Mixpanel, 'metrics_adapter/adapters/mixpanel'
     autoload :Keen, 'metrics_adapter/adapters/keen'
