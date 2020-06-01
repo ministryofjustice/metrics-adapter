@@ -1,4 +1,4 @@
-module GeneralMetrics
+module MetricsAdapter
   module Trackers
     class Base
       attr_reader :adapter,
@@ -8,13 +8,13 @@ module GeneralMetrics
                   :metric_name
 
       def initialize(event)
-        adapter_name = GeneralMetrics.adapter.to_s.classify
-        @adapter = "GeneralMetrics::Adapters::#{adapter_name}".constantize.new(
-          GeneralMetrics.adapter_options
+        adapter_name = MetricsAdapter.adapter.to_s.classify
+        @adapter = "MetricsAdapter::Adapters::#{adapter_name}".constantize.new(
+          MetricsAdapter.adapter_options
         )
         @event = event
-        @extra_attributes = ::GeneralMetrics.extra_attributes
-        @logger = ::GeneralMetrics.logger
+        @extra_attributes = ::MetricsAdapter.extra_attributes
+        @logger = ::MetricsAdapter.logger
         @metric_name = self.class.name.demodulize.underscore
       end
 

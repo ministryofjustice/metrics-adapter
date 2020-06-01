@@ -1,7 +1,7 @@
-require 'general_metrics/version'
+require 'metrics_adapter/version'
 require 'active_support/all'
 
-module GeneralMetrics
+module MetricsAdapter
   mattr_accessor :adapter
   mattr_accessor :logger
 
@@ -18,13 +18,13 @@ module GeneralMetrics
   self.thresholds = {}
 
   module Adapters
-    autoload :Mixpanel, 'general_metrics/adapters/mixpanel'
-    autoload :Keen, 'general_metrics/adapters/keen'
+    autoload :Mixpanel, 'metrics_adapter/adapters/mixpanel'
+    autoload :Keen, 'metrics_adapter/adapters/keen'
   end
 
   module Trackers
-    autoload :Base, 'general_metrics/trackers/base'
-    autoload :SlowRequest, 'general_metrics/trackers/slow_request'
+    autoload :Base, 'metrics_adapter/trackers/base'
+    autoload :SlowRequest, 'metrics_adapter/trackers/slow_request'
   end
 
   def self.configure(&block)

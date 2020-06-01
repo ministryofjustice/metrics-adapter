@@ -1,6 +1,6 @@
 require 'keen'
 
-class GeneralMetrics::Adapters::Keen
+class MetricsAdapter::Adapters::Keen
   attr_reader :project_id, :write_key
 
   def initialize(options)

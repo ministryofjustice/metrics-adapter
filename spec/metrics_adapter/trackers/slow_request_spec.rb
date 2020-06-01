@@ -1,18 +1,18 @@
-RSpec.describe GeneralMetrics::Trackers::SlowRequest do
+RSpec.describe MetricsAdapter::Trackers::SlowRequest do
   subject(:slow_request) { described_class.new(event) }
 
   describe '#call' do
     before do
       allow(
-        ::GeneralMetrics
+        ::MetricsAdapter
       ).to receive(:thresholds).and_return(slow_request: 100)
 
       allow(
-        ::GeneralMetrics
+        ::MetricsAdapter
       ).to receive(:adapter).and_return(:mixpanel)
 
       allow(
-        ::GeneralMetrics
+        ::MetricsAdapter
       ).to receive(:adapter_options).and_return(secret: 'foo')
     end
 

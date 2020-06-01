@@ -1,4 +1,4 @@
-# GeneralMetrics
+# Metrics Adapter
 
 A simple gem that collects application data to send to a metrics service.
 
@@ -7,7 +7,7 @@ A simple gem that collects application data to send to a metrics service.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'general_metrics'
+gem 'metrics_adapter'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install general_metrics
+    $ gem install metrics_adapter
 
 ## Setup
 
@@ -30,8 +30,8 @@ You can setup the following adapters/services:
 Below we setup Mixpanel service using the slow request tracker:
 
 ```ruby
-  # config/initializer/general_metrics.rb
-  require 'general_metrics/rails'
+  # config/initializer/metrics_adapter.rb
+  require 'metrics_adapter/rails'
 
   GeneralMetrics.configure do |config|
     config.adapter = :mixpanel
@@ -48,8 +48,8 @@ Below we setup Mixpanel service using the slow request tracker:
 Below we setup the Keen service using the slow request tracker:
 
 ```ruby
-  # config/initializer/general_metrics.rb
-  require 'general_metrics/rails'
+  # config/initializer/metrics_adapter.rb
+  require 'metrics_adapter/rails'
 
   GeneralMetrics.configure do |config|
     config.adapter = :keen

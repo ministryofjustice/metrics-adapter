@@ -1,11 +1,11 @@
 require 'mixpanel-ruby'
 
-class GeneralMetrics::Adapters::Mixpanel
+class MetricsAdapter::Adapters::Mixpanel
   attr_reader :tracker
 
   def initialize(options)
     @tracker = ::Mixpanel::Tracker.new(options.fetch(:secret))
-    @logger = ::GeneralMetrics.logger
+    @logger = ::MetricsAdapter.logger
   end
 
   def publish(data)

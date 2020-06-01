@@ -1,17 +1,17 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'general_metrics/version'
+require 'metrics_adapter/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'general_metrics'
-  spec.version       = GeneralMetrics::VERSION
+  spec.name          = 'metrics_adapter'
+  spec.version       = MetricsAdapter::VERSION
   spec.authors       = ['Form builder developers']
   spec.email         = ['form-builder-team@digital.justice.gov.uk']
 
   spec.summary       = %q{A gem that collect application metrics.}
   spec.description   = %q{Collect custom metrics from your application.}
-  spec.homepage      = 'https://github.com/ministryofjustice/general_metrics'
+  spec.homepage      = 'https://github.com/ministryofjustice/metrics_adapter'
   spec.license       = 'MIT'
 
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

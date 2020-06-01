@@ -1,10 +1,10 @@
-module GeneralMetrics
+module MetricsAdapter
   module Trackers
     class SlowRequest < Base
       attr_reader :slow_request_threshold
 
       def initialize(event)
-        @slow_request_threshold = ::GeneralMetrics.thresholds.fetch(:slow_request)
+        @slow_request_threshold = ::MetricsAdapter.thresholds.fetch(:slow_request)
         super
       end
 
