@@ -1,5 +1,8 @@
 require "bundler/setup"
-require "general_metrics"
+require "metrics_adapter"
+Dir[
+  File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))
+].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -1,17 +1,17 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'general_metrics/version'
+require 'metrics_adapter/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'general_metrics'
-  spec.version       = GeneralMetrics::VERSION
+  spec.name          = 'metrics_adapter'
+  spec.version       = MetricsAdapter::VERSION
   spec.authors       = ['Form builder developers']
   spec.email         = ['form-builder-team@digital.justice.gov.uk']
 
   spec.summary       = %q{A gem that collect application metrics.}
   spec.description   = %q{Collect custom metrics from your application.}
-  spec.homepage      = 'https://github.com/ministryofjustice/general_metrics'
+  spec.homepage      = 'https://github.com/ministryofjustice/metrics_adapter'
   spec.license       = 'MIT'
 
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -22,7 +22,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'activesupport'
+  spec.add_dependency 'mixpanel-ruby'
+  spec.add_dependency 'keen'
+
   spec.add_development_dependency 'bundler', '~> 1.17'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
 end
