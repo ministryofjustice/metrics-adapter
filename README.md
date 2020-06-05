@@ -60,6 +60,8 @@ Below we setup the Keen service using the slow request tracker:
     config.extra_attributes = { app: 'My-App' }
     config.logger = Rails.logger
     config.trackers = %i(slow_request)
+    block = -> { ENV['SOME_ENVIRONMENT_VARIABLE'] == 'production' }
+    config.conditionals = { slow_request: block }
     config.thresholds = { slow_request: 1_000 }
   end
 ```
