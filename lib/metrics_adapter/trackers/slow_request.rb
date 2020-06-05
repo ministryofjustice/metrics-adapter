@@ -9,6 +9,8 @@ module MetricsAdapter
       end
 
       def call
+        return if conditional.present? && conditional.call.blank?
+
         if event.duration > slow_request_threshold
           data = {
             id: event.transaction_id,
@@ -19,6 +21,9 @@ module MetricsAdapter
             idle_time_in_ms: event.idle_time,
             path: event.payload[:path]
           }.merge(extra_attributes)
+          logger.info(
+            "Slow request detected. Sending data to #{adapter.class.name}"
+          ) if logger
           adapter.publish(data)
         end
       end
